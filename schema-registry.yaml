@@ -1,0 +1,49 @@
+- hosts: schema_registry
+  become: yes
+  tasks:
+    - name: Install base dependencies
+      apt:
+        pkg:
+          - unzip
+          - openjdk-11-jre-headless
+          - gettext-base
+        state: present
+        update_cache: yes
+
+    - name: Ensure group "hortonworks" exists
+      ansible.builtin.group:
+        name: hortonworks
+        state: present
+    - name: Add the user 'hortonworks'
+      ansible.builtin.user:
+        name: hortonworks
+        group: hortonworks
+
+    - name: Unarchive horton Schema Registry binaries
+      ansible.builtin.unarchive:
+        src: https://github.com/hortonworks/registry/releases/download/0.9.1-rc1/hortonworks-registry-0.9.1.zip
+        dest: /opt
+        remote_src: yes
+        owner: hortonworks
+        group: hortonworks
+    
+    - name: Symblink the horton installation
+      ansible.builtin.file:
+        src: /opt/hortonworks-registry-0.9.1
+        dest: /opt/hortonworks-registry
+        owner: hortonworks
+        group: hortonworks
+        state: link
+        follow: False
+
+    - name: Use in memory persistence
+      ansible.builtin.copy:
+        src: /opt/hortonworks-registry/conf/registry-inmemory-example.yaml
+        remote_src: true
+        dest: /opt/hortonworks-registry/conf/registry.yaml
+        owner: hortonworks
+        group: hortonworks
+        mode: '0644'
+
+    - name: run schema registry
+      ansible.builtin.command: /opt/hortonworks-registry/bin/registry start

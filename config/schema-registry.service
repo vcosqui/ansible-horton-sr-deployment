@@ -1,0 +1,15 @@
+[Unit]
+Description=Hortonwork Registry Schema Service
+After=network.target
+
+[Service]
+Type=simple
+User=hortonworks
+PIDFile=/opt/hortonworks-registry/logs/registry.pid
+ExecStart=/opt/hortonworks-registry/bin/registry start
+ExecStop=/opt/hortonworks-registry/bin/registry stop
+Restart=on-abort
+
+
+[Install]
+WantedBy=multi-user.target
