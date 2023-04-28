@@ -20,11 +20,11 @@ apt install ansible
 ```shell
 make ping-hosts
 ```
-4. Install Zookeeper with command
+4. Install Schema Registry with command
 ```shell
 make install
 ```
-5. Test Zookeeper cluster status with command
+5. Test Schema Registry cluster status with command
 ```shell
 make test
 ```
