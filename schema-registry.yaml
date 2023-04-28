@@ -21,7 +21,7 @@
 
     - name: Unarchive horton Schema Registry binaries
       ansible.builtin.unarchive:
-        src: https://github.com/hortonworks/registry/releases/download/0.9.1-rc1/hortonworks-registry-0.9.1.zip
+        src: "{{ horton_sr_download_ulr }}"
         dest: /opt
         remote_src: yes
         owner: hortonworks
@@ -29,7 +29,7 @@
     
     - name: Symblink the horton installation
       ansible.builtin.file:
-        src: /opt/hortonworks-registry-0.9.1
+        src: "/opt/hortonworks-registry-{{ horton_sr_version }}"
         dest: /opt/hortonworks-registry
         owner: hortonworks
         group: hortonworks

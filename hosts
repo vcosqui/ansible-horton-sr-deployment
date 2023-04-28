@@ -1,2 +1,6 @@
+[schema_registry:vars]
+horton_sr_version=0.9.1
+horton_sr_download_ulr=https://github.com/hortonworks/registry/releases/download/0.9.1-rc1/hortonworks-registry-0.9.1.zip
+
 [schema_registry]
 horton_sr ansible_host=10.1.0.11
