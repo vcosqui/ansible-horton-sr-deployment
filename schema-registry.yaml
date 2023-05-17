@@ -5,7 +5,7 @@
       apt:
         pkg:
           - unzip
-          - openjdk-11-jre-headless
+          - "{{ jdk_version }}"
           - gettext-base
         state: present
         update_cache: yes
