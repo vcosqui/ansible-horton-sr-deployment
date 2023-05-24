@@ -8,4 +8,4 @@ jdk_version=openjdk-11-jre-headless
 #jdk_version=openjdk-8-jre-headless
 
 [schema_registry]
-horton_sr ansible_host=10.1.0.11
+migrations-migrations-source-subnet-sr-0
